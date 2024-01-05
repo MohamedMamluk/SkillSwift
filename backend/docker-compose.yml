@@ -1,0 +1,13 @@
+services:
+  courses:
+    build:
+      context: .
+      dockerfile: ./apps/courses/Dockerfile
+      target: development
+    command: npm run start:dev courses
+    env_file:
+      - ./apps/courses/.env
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
