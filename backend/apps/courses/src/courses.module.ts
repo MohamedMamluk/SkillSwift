@@ -6,7 +6,6 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { CoursesRepository } from './courses.repository';
 import { Course, CourseSchema } from './schemas/course.schema';
-import { AuthModule } from '../../auth/auth.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -17,7 +16,6 @@ import { AuthModule } from '../../auth/auth.module';
         PORT: Joi.string().required(),
       }),
     }),
-    AuthModule,
   ],
   controllers: [CoursesController],
   providers: [CoursesService, CoursesRepository],
