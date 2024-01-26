@@ -1,10 +1,10 @@
 import { AbstractDocument } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 @Schema({ timestamps: true })
 export class User extends AbstractDocument {
   @Prop({ default: null })
-  image: string;
+  image?: string;
 
   @Prop({ required: true })
   firstName: string;
@@ -13,9 +13,9 @@ export class User extends AbstractDocument {
   lastName: string;
 
   @Prop({ default: [] })
-  achievements: string[];
+  achievements?: string[];
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   email: string;
 
   @Prop({ required: true })
