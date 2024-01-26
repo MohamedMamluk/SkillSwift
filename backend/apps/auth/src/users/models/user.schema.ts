@@ -1,7 +1,8 @@
+import { AbstractDocument } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 @Schema({ timestamps: true })
-export class User {
+export class User extends AbstractDocument {
   @Prop({ default: null })
   image: string;
 
