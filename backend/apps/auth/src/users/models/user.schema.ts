@@ -25,9 +25,9 @@ export class User extends AbstractDocument {
   phoneNumber: string;
 }
 
-export const userDocument = SchemaFactory.createForClass(User);
+export const userSchema = SchemaFactory.createForClass(User);
 
-userDocument.pre('save', async function () {
+userSchema.pre('save', async function () {
   if (!this.isNew) {
     return;
   }
