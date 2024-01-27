@@ -10,7 +10,9 @@ export class UserService {
   async createUser(userData: CreateUserDto) {
     return this.userRepository.create(userData);
   }
-
+  async getUser(userData: { _id: string }) {
+    return this.userRepository.findOne(userData);
+  }
   async verifyUser(email: string, password: string) {
     try {
       const user = await this.userRepository.findOne({ email });
