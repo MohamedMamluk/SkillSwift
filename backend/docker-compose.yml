@@ -15,6 +15,9 @@ services:
       - mongodb-primary
       - mongodb-secondary
       - mongodb-arbiter
+      - auth
+      - rabbitmq
+
   payment:
     build:
       context: .
@@ -23,6 +26,23 @@ services:
     command: npm run start:dev payment
     env_file:
       - ./apps/payment/.env
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongodb-primary
+      - mongodb-secondary
+      - mongodb-arbiter
+      - auth
+      - rabbitmq
+
+  orders:
+    build:
+      context: .
+      dockerfile: ./apps/orders/Dockerfile
+      target: development
+    command: npm run start:dev orders
+    env_file:
+      - ./apps/orders/.env
     ports:
       - '3002:3002'
     volumes:
@@ -31,6 +51,9 @@ services:
       - mongodb-primary
       - mongodb-secondary
       - mongodb-arbiter
+      - auth
+      - payment
+      - rabbitmq
 
   auth:
     build:
@@ -48,6 +71,12 @@ services:
       - mongodb-primary
       - mongodb-secondary
       - mongodb-arbiter
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
 
   mongodb-primary:
     image: docker.io/bitnami/mongodb:7.0
