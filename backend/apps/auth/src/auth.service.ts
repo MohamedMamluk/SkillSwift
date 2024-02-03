@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './users/models/user.schema';
+import { User } from '@app/common';
 import { Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -20,7 +20,7 @@ export class AuthService {
       expires.getSeconds() + this.configService.get('JWT_EXPIRES'),
     );
 
-    response.cookie('access_token', token, {
+    response.cookie('Authentication', token, {
       httpOnly: true,
       expires,
     });
