@@ -1,5 +1,6 @@
 import { AbstractDocument } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 
 export interface LearningJourney {
   image: string;
@@ -14,6 +15,9 @@ export class Course extends AbstractDocument {
 
   @Prop({ required: true, trim: true })
   description: string;
+
+  @Prop({ required: true, trim: true })
+  seller: mongoose.Types.ObjectId;
 
   @Prop({ required: true, trim: true })
   sub_description: string;

@@ -12,16 +12,19 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: any) =>
-          request?.cookies?.Authentication ||
-          request?.Authentication ||
-          request?.headers.Authentication,
+        (request: any) => {
+          const token =
+            request?.cookies?.Authentication ||
+            request?.Authentication ||
+            request?.headers.Authentication;
+          return token;
+        },
       ]),
       secretOrKey: configService.get('JWT_SECRET'),
     });
   }
 
-  async validate({ userId }: { userId: string }) {
-    return this.usersService.getUser({ _id: userId });
+  async validate({ _id }: { _id: string }) {
+    return this.usersService.getUser({ _id });
   }
 }

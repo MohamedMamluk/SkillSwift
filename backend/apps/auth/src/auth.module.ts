@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { RmqModule } from '@app/common';
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         PORT: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRES: Joi.number().required(),
+        RABBIT_MQ_URI: Joi.string().required(),
+        RABBIT_MQ_AUTH_QUEUE: Joi.string().required(),
       }),
     }),
     JwtModule.registerAsync({
@@ -31,6 +34,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       inject: [ConfigService],
     }),
     UsersModule,
+    RmqModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],

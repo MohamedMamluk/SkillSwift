@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { PaymentModule } from './payment.module';
-import { ConfigService } from '@nestjs/config';
+import { Queues, RmqService } from '@app/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(PaymentModule);
-  const configService = app.get(ConfigService);
-  await app.listen(configService.get('PORT'));
+  const rmqService = app.get(RmqService);
+  app.connectMicroservice(rmqService.getOptions(Queues.PAYMENT, true));
+  await app.startAllMicroservices();
 }
 bootstrap();
