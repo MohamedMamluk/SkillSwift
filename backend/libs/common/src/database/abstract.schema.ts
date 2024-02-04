@@ -1,8 +1,8 @@
 import { Prop, Schema } from '@nestjs/mongoose';
-import { SchemaTypes, Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 @Schema()
 export class AbstractDocument {
-  @Prop({ type: SchemaTypes.ObjectId })
-  _id: Types.ObjectId;
+  @Prop({ type: mongoose.Schema.Types.ObjectId })
+  _id: mongoose.Schema.Types.ObjectId;
 }
