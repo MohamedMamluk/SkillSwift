@@ -12,7 +12,7 @@ export class AuthService {
   ) {}
   async login(userData: User, response: Response) {
     const token = this.jwtService.sign({
-      _id: userData._id.toHexString(),
+      _id: userData._id,
     });
 
     const expires = new Date();

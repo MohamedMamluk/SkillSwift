@@ -17,7 +17,7 @@ export class Course extends AbstractDocument {
   description: string;
 
   @Prop({ required: true, trim: true })
-  seller: mongoose.Types.ObjectId;
+  seller: mongoose.Schema.Types.ObjectId;
 
   @Prop({ required: true, trim: true })
   sub_description: string;
