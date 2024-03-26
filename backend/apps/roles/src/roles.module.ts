@@ -8,6 +8,7 @@ import * as Joi from 'joi';
 import { RolesController } from './roles.controller';
 import { RolesService } from './roles.service';
 import { Role, RoleSchema } from './models/role.schema';
+import { RolesRepository } from './roles.repository';
 
 @Module({
   imports: [
@@ -26,6 +27,6 @@ import { Role, RoleSchema } from './models/role.schema';
     AuthModule,
   ],
   controllers: [RolesController],
-  providers: [RolesService],
+  providers: [RolesService, RolesRepository],
 })
 export class RolesModule {}
