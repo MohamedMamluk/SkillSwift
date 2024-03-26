@@ -1,4 +1,22 @@
 services:
+  roles:
+    build:
+      context: .
+      dockerfile: ./apps/roles/Dockerfile
+      target: development
+    command: npm run start:dev roles
+    env_file:
+      - ./apps/roles/.env
+    ports:
+      - '3006:3006'
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongodb-primary
+      - mongodb-secondary
+      - mongodb-arbiter
+      - auth
+      - rabbitmq
   courses:
     build:
       context: .
