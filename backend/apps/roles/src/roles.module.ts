@@ -7,11 +7,12 @@ import * as Joi from 'joi';
 
 import { RolesController } from './roles.controller';
 import { RolesService } from './roles.service';
+import { Role, RoleSchema } from './models/role.schema';
 
 @Module({
   imports: [
     DatabaseModule,
-    // DatabaseModule.forFeature([{ schema: CourseSchema, name: Course.name }]),
+    DatabaseModule.forFeature([{ schema: RoleSchema, name: Role.name }]),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
