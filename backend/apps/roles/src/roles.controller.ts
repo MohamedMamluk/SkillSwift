@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { RolesService } from './roles.service';
+import { CreateRoleDto } from './dto/create_role.dto';
 
-@Controller()
+@Controller('role')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 
-  @Get()
-  getHello(): string {
-    return this.rolesService.getHello();
+  @Post('')
+  async create(@Body() createRoleBody: CreateRoleDto) {
+    return this.rolesService.create(createRoleBody);
   }
 }
